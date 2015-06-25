@@ -13,12 +13,14 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/freelancer"
-            android:id="@+id/imageView"/>
-        </RelativeLayout>
+            android:id="@+id/imageView" />
+    </RelativeLayout>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,11 +32,6 @@
 
         android:id="@+id/linearLayout">
 
-        <!--<TextView-->
-            <!--android:id="@+id/txtOutput"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="Output.."/>-->
         <ListView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

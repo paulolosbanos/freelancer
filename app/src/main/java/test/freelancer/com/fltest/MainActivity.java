@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.JsonParser;
 
@@ -42,22 +41,23 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        InitializeControls();
         // Instantiate Connection class
         mConnection = new Connection(getApplicationContext());
         // Get connection state to know if application is connected to internet
-        if (mConnection.isConnectingToInternet()) {
-            Toast.makeText(MainActivity.this, "You are connected to the internet...", Toast.LENGTH_LONG).show();
-            PrefsManager.init(getApplicationContext());
+        new AsyncTaskParseJson();
+        // Reflect TV Program list to List View
+        // GetTVProgramsList();
 
-            // Execute AsyncTask
-            new AsyncTaskParseJson.execute();
-
-            // GetTVProgramsList();
-            ArrayAdapter<TVProgram> mAdapter = new ArrayAdapter<TVProgram>(this, android.R.layout.simple_list_item_1, mArrayList);
-            mListView.setAdapter(mAdapter);
-        } else {
-            Toast.makeText(MainActivity.this, "Please connect to internet first.", Toast.LENGTH_LONG).show();
-        }
+//        if (mConnection.isConnectingToInternet()) {
+//            Toast.makeText(MainActivity.this, "You are connected to the internet...", Toast.LENGTH_LONG).show();
+//            //PrefsManager.init(getApplicationContext());
+//
+//            // Execute AsyncTask
+//
+//        } else {
+//            Toast.makeText(MainActivity.this, "Please connect to internet first.", Toast.LENGTH_LONG).show();
+//        }
     }
 
     private void InitializeControls() {
@@ -66,6 +66,9 @@ public class MainActivity extends Activity {
 
     private void GetTVProgramsList() {
         mArrayList = mPrefs.getCachedProgrammeResponse();
+
+        ArrayAdapter<TVProgram> mAdapter = new ArrayAdapter<TVProgram>(this, android.R.layout.simple_list_item_1, mArrayList);
+        mListView.setAdapter(mAdapter);
     }
 
     public class AsyncTaskParseJson extends AsyncTask<Void, String, JSONObject> {
@@ -74,7 +77,6 @@ public class MainActivity extends Activity {
 
         // set your json string url here
         String jsonUrlString = Constants.API;
-
         // contacts JSONArray
         JSONArray dataJsonArr = null;
 
@@ -99,12 +101,14 @@ public class MainActivity extends Activity {
             try {
                 JSONArray response = post.getJSONArray("results");
                 JSONObject mObject = response.getJSONObject(0);
+
 //                String answer = post.getString();
 //                Gson gson = new Gson();
 //                TVProgram tvProgram = gson.fromJson(answer, TVProgram.class);
 //                if (tvProgram.equals(null)) {
 //                    Toast.makeText(MainActivity.this, "Error in getting Json", Toast.LENGTH_LONG).show();
 //                }
+
                 // Get the values from Json Object and set to the class
                 mTvProgram.setName(mObject.get(TAG_NAME).toString().replace("\"", ""));
                 mTvProgram.setChannel(mObject.get(TAG_CHANNEL).toString().replace("\"", ""));
@@ -112,6 +116,7 @@ public class MainActivity extends Activity {
                 mTvProgram.setEndTime(mObject.get(TAG_ENDTIME).toString().replace("\"", ""));
                 mTvProgram.setRating(mObject.get(TAG_RATING).toString().replace("\"", ""));
                 mArrayList.add(mTvProgram);
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }

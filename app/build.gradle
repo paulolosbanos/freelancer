@@ -8,7 +8,7 @@ android {
     defaultConfig {
         applicationId "test.freelancer.com.fltest"
         // min sdk version = gingerbread
-        minSdkVersion 18
+        minSdkVersion 8
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
