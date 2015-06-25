@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/list_item_position"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_margin="4dp"
+        android:text="1"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/list_item_position">
+        <TextView
+            android:id="@+id/list_item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dummy title"/>
+
+        <TextView
+            android:id="@+id/list_item_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@id/list_item_name"
+            android:text="Dummy rating: M"/>
+
+        <TextView
+            android:id="@+id/list_item_label_channel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/list_item_name"
+            android:text="Channel:"/>
+
+        <TextView
+            android:id="@+id/list_item_channel_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@id/list_item_label_channel"
+            android:layout_below="@id/list_item_name"
+            android:text="9"/>
+
+        <TextView
+            android:id="@+id/list_item_label_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/list_item_label_channel"
+            android:text="Time:"
+            />
+
+        <TextView
+            android:id="@+id/list_item_time_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_below="@id/list_item_label_channel"
+            android:layout_toRightOf="@id/list_item_label_time"
+            android:text="9pm to 10pm"
+            />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>
