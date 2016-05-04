@@ -35,7 +35,14 @@
         <ListView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/listOutput" />
+            android:visibility="gone"
+            android:id="@+id/listOutput1" />
+
+        <com.handmark.pulltorefresh.library.PullToRefreshListView
+            android:id="@+id/listOutput"
+            android:layout_height="400dp"
+            android:layout_width="match_parent" />
+
     </LinearLayout>
 
 

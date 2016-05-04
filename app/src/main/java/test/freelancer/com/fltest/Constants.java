@@ -6,5 +6,5 @@ package test.freelancer.com.fltest;
 public class Constants {
 
 //    public static final String API = "http://whatsbeef.net/wabz/guide.php?start=";
-    public static final String API = "http://whatsbeef.net/wabz/guide.php?start=0";
+    public static final String API = "http://whatsbeef.net/wabz/guide.php?start=";
 }

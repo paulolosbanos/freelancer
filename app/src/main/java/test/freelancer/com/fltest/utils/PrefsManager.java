@@ -24,6 +24,26 @@ public class PrefsManager {
     private Context context;
     private final String TAG = "Freelancer";
     private static final int OFFSET = 0;
+    private static int lastItemCounter = 0;
+    private int maxItem;
+
+    public void setMaxItem(int maxItem) {
+        this.maxItem = maxItem;
+    }
+
+    public int getMaxItem() {
+        return maxItem;
+    }
+
+    public void setLastItemCounter(int ctr) {
+        if(ctr > maxItem)
+            ctr = maxItem;
+        lastItemCounter = ctr;
+    }
+
+    public int getLastItemCounter() {
+        return lastItemCounter;
+    }
 
     public static void init(Context context) {
         // the default mode, where the created file can only be accessed by the calling application
@@ -33,12 +53,6 @@ public class PrefsManager {
 
         if (sInstance == null) {
             sInstance = new PrefsManager(context);
-        }
-        try {
-            // Request program list
-            WebRequestUtil.requestProgramsList(OFFSET);
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
@@ -55,7 +69,8 @@ public class PrefsManager {
         if (tvProgramsList != null && !tvProgramsList.isEmpty()) {
             Gson gson = new Gson();
             String result = gson.toJson(tvProgramsList);
-            mPref.edit().putString(KEY_TV_PROGRAM_LIST, result);
+            mPref.edit().putString(KEY_TV_PROGRAM_LIST, result).commit();
+
             // Checker
             Log.d(TAG, "Result: " + TAG);
         }
@@ -63,7 +78,6 @@ public class PrefsManager {
 
     public List<TVProgram> getCachedProgrammeResponse() {
         String result = mPref.getString(KEY_TV_PROGRAM_LIST, "");
-
         if (result.isEmpty()) {
             return null;
         }
